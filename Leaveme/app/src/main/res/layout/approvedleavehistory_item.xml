@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/separatorlayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView
+            android:id="@+id/topdivider"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:background="#78909C"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/monthtext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="JANUARY"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="25dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/hdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:padding="15dp"
+            android:background="@drawable/circleshape"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            />
+
+        <!--this relative width needs to be put in dimen -->
+        <RelativeLayout
+            android:id="@+id/typedesc"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:layout_toRightOf="@+id/hdate"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="5dp">
+            <TextView
+                android:id="@+id/htype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="2dp"
+                android:singleLine="true"
+                android:text="abc"
+
+                />
+            <TextView
+                android:id="@+id/hdesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:singleLine="true"
+                android:text="desc"
+                android:layout_below="@+id/htype"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/hdays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_marginRight="2dp"
+            android:layout_toRightOf="@+id/typedesc"
+            android:textSize="30dp"
+            android:paddingRight="5dp"
+            android:text="2d"
+            android:textColor="#ff0000"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="end" />
+    </RelativeLayout>
+</LinearLayout>

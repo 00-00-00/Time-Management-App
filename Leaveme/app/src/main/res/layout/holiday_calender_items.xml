@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/month_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#0000ff"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Jan"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="1dp"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#aaff0000"
+            >
+
+             <com.incture.leaveme.SquareImageView
+                 android:id="@+id/HolidayPicture"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:scaleType="fitXY"
+                 />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#11ff0000"
+                >
+                <TextView
+                android:id="@+id/hdate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="02"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="50sp"
+                android:textStyle="normal"
+                />
+                <TextView
+                    android:id="@+id/hday"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FRI"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/hdate"
+                    />
+            </RelativeLayout>
+
+        </FrameLayout>
+
+       <LinearLayout
+            android:id="@+id/gridfooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:background="@color/my_primary"
+>
+           <TextView
+               android:id="@+id/HolidayName"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:paddingRight="3dp"
+               android:paddingTop="1dp"
+               android:layout_gravity="bottom"
+               android:textColor="@android:color/white"
+               android:text="Gandhi Jayanthi"
+               android:textSize="18dp"
+               android:singleLine="true"
+               android:textStyle="bold"
+               />
+           <TextView
+               android:id="@+id/Holidaytype"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:paddingRight="3dp"
+               android:paddingBottom="1dp"
+               android:layout_gravity="bottom"
+               android:textColor="@android:color/white"
+               android:text="Mandatory"
+               android:textSize="15dp"
+               />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

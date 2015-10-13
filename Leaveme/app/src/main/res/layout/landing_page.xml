@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/my_primary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <android.support.v4.widget.DrawerLayout
+
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/calenderHeight"
+                android:focusedMonthDateColor="@color/my_icons"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:weekSeparatorLineColor="@color/my_primary"
+                android:background="@color/my_primary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:unfocusedMonthDateColor="#78909C"
+                />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                   >
+
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#78909C" />
+
+                    <!-- Center Availed and available text views -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+
+                        <!-- 1. Availed TextView -->
+                        <RelativeLayout
+                            android:id="@+id/l1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical">
+
+                                <!-- Number of availed -->
+                                <TextView
+                                    android:id="@+id/availed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="40sp"
+                                    android:textStyle="bold" />
+
+                                <!-- Textview Availed -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Availed" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <!-- 2. Available textviews -->
+                        <RelativeLayout
+                            android:id="@+id/l2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical">
+                                <!-- Available number -->
+                                <TextView
+                                    android:id="@+id/available"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="40sp"
+                                    android:textStyle="bold" />
+                                <!-- textview available -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Available" />
+                            </LinearLayout>
+                        </RelativeLayout>  <!-- Availble textview ends -->
+
+                        <!-- Center margin vertical -->
+                        <ImageView
+                            android:id="@+id/line3"
+                            android:layout_width="2dp"
+                            android:layout_height="100dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="5dp"
+                            android:background="#000000" />
+
+                        <!-- Horizontal margin -->
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@id/line3"
+                            android:background="#78909C" />
+
+                    </RelativeLayout><!-- center part availed and available views end -->
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/my_primary"
+                        android:text="View Holiday Calendar"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_margin="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:background="@color/my_primary"
+                        android:text="View Leave History"
+                        android:textColor="#ffffff" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="casual"
+                            android:layout_margin="10dp"/>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar1"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/custom_progressbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_margin="10dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sick    "
+                            android:layout_margin="10dp"/>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar2"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/custom_progressbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_margin="10dp"/>
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+               </ScrollView>
+            </LinearLayout>
+        <!--    </ScrollView>-->
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="10dp"
+                android:src="@drawable/add"
+                app:backgroundTint="#ffc107" />
+        </android.support.design.widget.CoordinatorLayout>
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/drawer" />
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
+
+
+    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:text="MARCH 2015"
+                         android:layout_margin="10dp"
+                         android:textStyle="bold"
+                         android:textColor="#696969"
+                         android:textSize="15sp"/>
+
+                     <RelativeLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:gravity="end">
+
+                         <TextView
+                             android:id="@+id/date1"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginLeft="10dp"
+                             android:textSize="18sp"
+                             android:text="Mar 15" />
+
+
+                         <TextView
+                             android:id="@+id/reason1"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:textSize="18sp"
+                             android:layout_centerHorizontal="true"
+                             android:text="Casual" />
+
+                         <ImageView
+                             android:layout_width="30dp"
+                             android:layout_height="18dp"
+                             android:layout_marginRight="20dp"
+                             android:layout_alignParentEnd="true"
+                             android:layout_alignParentRight="true"
+                             android:src="@drawable/d2_yellow"
+                             />
+                     </RelativeLayout>
+ -->
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:text="Mar 28" />
+
+
+        <TextView
+            android:id="@+id/reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:text="Casual" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="18dp"
+
+            android:layout_marginRight="20dp"
+
+
+            android:layout_alignParentRight="true"
+            android:src="@drawable/d2_yellow" />
+
+
+    </RelativeLayout>
+-->
+    <!--                        android:layout_marginTop="5dp"
+    -->

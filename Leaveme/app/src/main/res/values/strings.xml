@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Leave_Time</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="opendrawer">Leave History</string>
+    <string name="closedrawer">Leave History</string>
+    <string name="drawer_open">Leave History</string>
+    <string name="drawer_close">Leave History</string>
+
+    <string-array name="leave_types">
+        <item>Work from home</item>
+        <item>Casual</item>
+        <item>Sick</item>
+        <item>Optional</item>
+        <item>Unpaid</item>
+        <item>Bereavement</item>
+
+    </string-array>
+</resources>
