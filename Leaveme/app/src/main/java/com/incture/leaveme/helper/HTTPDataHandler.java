@@ -27,7 +27,7 @@ public class HTTPDataHandler {
         try{
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+            urlConnection.setRequestProperty("uniqueid","5608f9af98fbab3209bc7436");
             // Check the connection status
             if(urlConnection.getResponseCode() == 200)
             {

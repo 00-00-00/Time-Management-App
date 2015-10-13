@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.incture.leaveme.DataHandle.ServerDetails;
 import com.incture.leaveme.activity.ApplyLeavePage;
 import com.incture.leaveme.activity.Holiday_Calendaar;
 import com.incture.leaveme.activity.Leave_history;
@@ -220,7 +221,7 @@ public class Landing_page extends AppCompatActivity {
 
 
     class LeaveRecord_AsyncTask extends AsyncTask<String, Void, String> {
-        private String urlstring = "http://172.31.99.165:8888/leaveSummary?id=5608f9af98fbab3209bc7436";
+        private String urlstring = ServerDetails.LEAVE_SUMMARY;
 
         Context ctx = getApplicationContext();
 
