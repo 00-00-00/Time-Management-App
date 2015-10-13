@@ -1,20 +1,25 @@
 package com.incture.leaveme.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.incture.leaveme.AdapterHolidayList;
+import com.incture.leaveme.DataHandle.HolidayCalenderAsyncTask;
 import com.incture.leaveme.R;
 import com.incture.leaveme.data.temp;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +35,7 @@ public class Holiday_Calendaar extends AppCompatActivity {
       //  data.add(new temp("Aug 15", "Saturday", "Independence Day", "Mandatory",R.drawable.));
       //  data.add(new temp("Aug 28", "Friday", "Thiruvonam", "Optional"));
 
-        data.add(new temp("JANUARY","05", "Saturday", "Janmashtami", "Mandatory",R.drawable.agrasen,1));
+       /* data.add(new temp("JANUARY","05", "Saturday", "Janmashtami", "Mandatory",R.drawable.agrasen,1));
         data.add(new temp("JANUARY","21", "Monday", "Sree Narayana Guru Samadhi", "Optional",R.drawable.god22h,2));
         data.add(new temp("JANUARY","24", "Thursday", "Bakrid", "Optional",R.drawable.muharramwallpapershdislamic,3));
 
@@ -50,9 +55,11 @@ public class Holiday_Calendaar extends AppCompatActivity {
         data.add(new temp("MAY","21", "Monday", "Sree Narayana Guru Samadhi", "Optional",R.drawable.god22h,2));
         data.add(new temp("MAY","21", "Monday", "Sree Narayana Guru Samadhi", "Optional",R.drawable.god22h,3));
 
-        data.add(new temp("JUNE","21", "Monday", "Sree Narayana Guru Samadhi", "Optional",R.drawable.god22h,1));
+        data.add(new temp("JUNE","21", "Monday", "Sree Narayana Guru Samadhi", "Optional",R.drawable.god22h,1));*/
 
     }
+
+    Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,8 @@ public class Holiday_Calendaar extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Holiday Calender");
+
+        ctx = this;
 
 
         //Set the custom toolbar as the action bar
@@ -78,17 +87,24 @@ public class Holiday_Calendaar extends AppCompatActivity {
         });
      //   new JSONAsyncTask().execute();
 
-        rv = (RecyclerView)findViewById(R.id.list);
-        rv.setLayoutManager(new GridLayoutManager( Holiday_Calendaar.this , 3));
-        rv.setHasFixedSize(true);
-        AdapterHolidayList adapter = new AdapterHolidayList(data,
-                new AdapterHolidayList.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
+        try {
+            Log.d("LEAVE", "inside URi");
+            //   URL uri = new URL("hleave-history99.106:8000/leave-history");
+            URL uri = new URL("http://172.16.10.157:8000/holidays");
+            // new LeaveHistoryAsyncTask(uri, ctx).execute();
 
-                    }
-                });
-        rv.setAdapter(adapter);
+            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB)
+                new HolidayCalenderAsyncTask(uri,ctx).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            else
+                new HolidayCalenderAsyncTask(uri,ctx).execute();
+
+            Log.d("LEAVE", "inside after URi");
+        }catch (MalformedURLException e) {e.printStackTrace();
+        }
+
+
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

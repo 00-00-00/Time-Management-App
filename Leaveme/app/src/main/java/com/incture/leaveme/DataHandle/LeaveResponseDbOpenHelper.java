@@ -33,7 +33,7 @@ public class LeaveResponseDbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String CREATE_SUBTYPE_TEXT_TABLE = "CREATE TABLE " + HISTORY_TABLE_NAME + "("
-                + HISTORY_TABLE_ID + " INTEGER PRIMARY KEY," + HISTORY_TABLE_DATE + " TEXT"
+                + HISTORY_TABLE_DATE + " TEXT"
                 + ")";
         db.execSQL(CREATE_SUBTYPE_TEXT_TABLE);
 
@@ -53,9 +53,13 @@ public class LeaveResponseDbOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put( HISTORY_TABLE_NAME, response);
+        values.put(HISTORY_TABLE_DATE, response);
 
-        db.insert(HISTORY_TABLE_ID, null, values);
+     //   db.insert(HISTORY_TABLE_ID, null, values);
+        db.insert(HISTORY_TABLE_NAME,null,values);
+
+        Log.d("DB","Insert success at addMember");
+
         db.close();
     }
 
@@ -67,7 +71,7 @@ public class LeaveResponseDbOpenHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         String response = cursor.getString(1);
         Log.i("com.incture","Response from Database @ OpenHelper :"+response);
-
+        Log.d("DB", "At getResponseStructure");
         return response;
 
     }

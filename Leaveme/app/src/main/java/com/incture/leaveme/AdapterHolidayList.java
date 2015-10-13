@@ -1,6 +1,7 @@
 package com.incture.leaveme;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.incture.leaveme.data.temp;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Mohammed on 8/25/2015.
@@ -33,6 +34,7 @@ public class AdapterHolidayList extends RecyclerView.Adapter<AdapterHolidayList.
         public final TextView mTextView,month_indicator,date,day,type;
         public final ImageView mArtView;
         public final LinearLayout linearLayout;
+        public final RelativeLayout fm;
         int[] androidColors = context.getResources().getIntArray(R.array.androidcolors);
 
         public ViewHolder(View view) {
@@ -46,6 +48,7 @@ public class AdapterHolidayList extends RecyclerView.Adapter<AdapterHolidayList.
             day=(TextView)view.findViewById(R.id.hday);
             type=(TextView)view.findViewById(R.id.Holidaytype);
             linearLayout=(LinearLayout)view.findViewById(R.id.gridfooter);
+            fm= (RelativeLayout)view.findViewById(R.id.frameblur);
 
             Typeface typeface_regular= Typeface.createFromAsset(context.getAssets(),"Roboto-Regular.ttf");
             month_indicator.setTypeface(typeface_regular);
@@ -56,8 +59,18 @@ public class AdapterHolidayList extends RecyclerView.Adapter<AdapterHolidayList.
             date.setTypeface(typeface);
             type.setTypeface(typeface);
 
-            int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+          /*  int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
             linearLayout.setBackgroundColor(randomAndroidColor);
+            fm.setBackgroundColor();*/
+
+            int r = (int) (0xff * Math.random());
+            int g = (int) (0xff * Math.random());
+            int b = (int) (0xff * Math.random());
+            // int alpha = B3;
+            int alpha = 0xB3;
+            int alphafooter=0xFF;
+            linearLayout.setBackgroundColor(Color.argb(alphafooter, r, g, b));
+            fm.setBackgroundColor(Color.argb(alpha, r, g, b));
         }
     }
 
@@ -107,9 +120,9 @@ public class AdapterHolidayList extends RecyclerView.Adapter<AdapterHolidayList.
         holder.mTextView.setText(oList.getEvent());
 
         Picasso.with(context)
-                .load(oList.getImage())
-                .error(R.drawable.abc_action_bar_item_background_material)
-                .into(holder.mArtView);
+                .load("http://172.16.10.157:8000"+oList.getLink())
+                        .error(R.drawable.abc_action_bar_item_background_material)
+                        .into(holder.mArtView);
 
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override

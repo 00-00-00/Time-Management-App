@@ -1,6 +1,7 @@
 package com.incture.leaveme.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,14 @@ public class AdapterApprovedLeaveHistory extends RecyclerView.Adapter<AdapterApp
             monthtext=(TextView)view.findViewById(R.id.monthtext);
             sep = (LinearLayout)view.findViewById(R.id.separatorlayout);
             divider = (ImageView)view.findViewById(R.id.topdivider);
+
+            Typeface typeface_regular= Typeface.createFromAsset(context.getAssets(),"Roboto-Bold.ttf");
+            monthtext.setTypeface(typeface_regular);
+
+            Typeface typeface= Typeface.createFromAsset(context.getAssets(),"Roboto-Regular.ttf");
+            hdesc.setTypeface(typeface);
+            htype.setTypeface(typeface);
+            hnumday.setTypeface(typeface);
         }
     }
 

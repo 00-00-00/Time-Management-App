@@ -1,6 +1,7 @@
 package com.incture.leaveme.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class AdapterAllLeaveHistory extends RecyclerView.Adapter<AdapterAllLeave
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public final TextView hdate,htype,hdesc,hnumday,monthtext;
+        public final TextView hdate,htype,hdesc,hnumday,monthtext,dalfa;
         public final LinearLayout sep;
         public final ImageView divider;
 
@@ -47,6 +48,7 @@ public class AdapterAllLeaveHistory extends RecyclerView.Adapter<AdapterAllLeave
             monthtext=(TextView)view.findViewById(R.id.monthtext);
             sep = (LinearLayout)view.findViewById(R.id.separatorlayout);
             divider = (ImageView)view.findViewById(R.id.topdivider);
+            dalfa = (TextView)view.findViewById(R.id.dayDalpha);
 
             Typeface typeface_regular= Typeface.createFromAsset(context.getAssets(),"Roboto-Bold.ttf");
             monthtext.setTypeface(typeface_regular);
@@ -107,6 +109,18 @@ public class AdapterAllLeaveHistory extends RecyclerView.Adapter<AdapterAllLeave
             holder.htype.setText(oList.getType());
             holder.hdesc.setText(oList.getDesc());
             holder.hnumday.setText(oList.getNumdays());
+        if(oList.getStatus().equalsIgnoreCase("applied")){
+            holder.dalfa.setTextColor(Color.YELLOW);
+            holder.hnumday.setTextColor(Color.YELLOW);
+        }
+        if(oList.getStatus().equalsIgnoreCase("approved")){
+            holder.dalfa.setTextColor(Color.GREEN);
+            holder.hnumday.setTextColor(Color.GREEN);
+        }
+        if(oList.getStatus().equalsIgnoreCase("rejected")){
+            holder.dalfa.setTextColor(Color.RED);
+            holder.hnumday.setTextColor(Color.RED);
+        }
 
         try {
             switch (getItemViewType(position)) {

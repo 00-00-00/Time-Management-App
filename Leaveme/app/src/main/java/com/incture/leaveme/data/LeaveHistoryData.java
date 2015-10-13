@@ -10,6 +10,16 @@ public class LeaveHistoryData {
     String numdays;
     String head;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    String status;
+
     public String getHead() {
         return head;
     }
@@ -18,13 +28,14 @@ public class LeaveHistoryData {
         this.head = head;
     }
 
-    public LeaveHistoryData(String month,String date,String t,String d,String n, String head){
+    public LeaveHistoryData(String month,String date,String t,String d,String n, String head,String st){
         this.month=month;
         this.date=date;
         this.type=t;
         this.desc=d;
         this.numdays=n;
         this.head=head;
+        this.status=st;
     }
     public String getMonth() {
         return month;
