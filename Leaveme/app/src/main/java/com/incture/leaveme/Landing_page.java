@@ -3,6 +3,7 @@ package com.incture.leaveme;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.incture.leaveme.DataHandle.ServerDetails;
 import com.incture.leaveme.activity.ApplyLeavePage;
 import com.incture.leaveme.activity.Holiday_Calendaar;
@@ -31,6 +33,7 @@ import com.incture.leaveme.activity.Notifications;
 import com.incture.leaveme.activity.Reports;
 import com.incture.leaveme.helper.HTTPDataHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,11 +104,11 @@ public class Landing_page extends AppCompatActivity {
         cal = (CalendarView) findViewById(R.id.calendarView);
         cal.setShowWeekNumber(false);
 
-        // Get the Drawable custom_progressbar
-        Drawable draw=getResources().getDrawable(R.drawable.custom_progressbar);
-// set the drawable as progress drawable
-        ProgressBar progressBar =(ProgressBar)findViewById(R.id.progressBar1);
-        progressBar.setProgressDrawable(draw);
+//        // Get the Drawable custom_progressbar
+//        Drawable draw=getResources().getDrawable(R.drawable.custom_progressbar);
+//// set the drawable as progress drawable
+//        ProgressBar progressBar =(ProgressBar)findViewById(R.id.progressBar1);
+//        progressBar.setProgressDrawable(draw);
 
        // cal.setMinDate(min.getTime());
     }
@@ -242,12 +245,13 @@ public class Landing_page extends AppCompatActivity {
 
         protected void onPostExecute(String stream){
             String availVal= null, availableVal=null;
+            int totalProgress =0 , availedProgress = 0;
 
             Log.i("JSON", " onPostExecute ");
             //..........Process JSON DATA................
             if(stream !=null){
                 try{
-                    Log.i("JSON", " stream got data ");
+                    Log.i("JSON", " stream got data "+stream);
                     JSONObject reader= new JSONObject(stream);
 
                     JSONObject coord = reader.getJSONObject("data");
@@ -255,6 +259,15 @@ public class Landing_page extends AppCompatActivity {
                     availVal = coord.getString("availed");
 
                     availableVal = coord.getString("available");
+
+
+                    JSONArray jsonArray = coord.optJSONArray("category");
+                    JSONObject jsonObject = jsonArray.optJSONObject(0);
+                    totalProgress = jsonObject.optInt("total");
+                    availedProgress = jsonObject.optInt("availed");
+
+                    Log.i("JSON", " stream got data "+stream);
+
                 }
                 catch(JSONException e){
                     e.printStackTrace();
@@ -265,6 +278,17 @@ public class Landing_page extends AppCompatActivity {
 
                 TextView available = (TextView)findViewById(R.id.available);
                 available.setText(availableVal);
+
+
+                RoundCornerProgressBar progress1 = (RoundCornerProgressBar) findViewById(R.id.progressBar1);
+                progress1.setProgressColor(R.color.my_primary_dark);
+                progress1.setBackgroundColor(Color.parseColor("#E0E0E0"));
+                progress1.setMax(totalProgress);
+                progress1.setProgress(availedProgress);
+
+                TextView textView = (TextView)findViewById(R.id.progresstext1);
+                textView.setText(""+availedProgress+"/"+totalProgress);
+
 
             } // if statement end
         } // onPostExecute() end

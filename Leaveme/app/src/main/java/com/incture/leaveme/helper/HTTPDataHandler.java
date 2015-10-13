@@ -3,6 +3,8 @@ package com.incture.leaveme.helper;
 /**
  * Created by Mohammed on 9/30/2015.
  */
+import com.incture.leaveme.DataHandle.ServerDetails;
+
 import java.net.HttpURLConnection;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
@@ -27,7 +29,7 @@ public class HTTPDataHandler {
         try{
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("uniqueid","5608f9af98fbab3209bc7436");
+            urlConnection.setRequestProperty("uniqueid", ServerDetails.UNIQUE_ID);
             // Check the connection status
             if(urlConnection.getResponseCode() == 200)
             {
