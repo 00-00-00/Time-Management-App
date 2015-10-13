@@ -244,6 +244,7 @@
             android:gravity="center"
             />
         <Button
+            android:onClick="applyLeave"
             android:id="@+id/button"
             android:layout_width="100dp"
             android:layout_height="50dp"
