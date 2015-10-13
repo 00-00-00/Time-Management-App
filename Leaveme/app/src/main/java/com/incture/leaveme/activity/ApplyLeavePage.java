@@ -17,22 +17,40 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.incture.leaveme.DataHandle.ApplyLeaveAsyncTask;
+import com.incture.leaveme.DataHandle.ServerDetails;
 import com.incture.leaveme.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class ApplyLeavePage extends AppCompatActivity {
 
     Button b;
-    EditText fromtext,totext,ftext,ttext;
+    EditText fromtext,totext,ftext,ttext,reason;
+
+
     Calendar myCalendar,myCalendar1;
+    Switch onOffSwitch; Boolean halfDay = false;
+    Spinner leaveType;
 
     String mySwitch,days;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +59,9 @@ public class ApplyLeavePage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Apply Leave");
         b=(Button)findViewById(R.id.button);
+
+        reason = (EditText)findViewById(R.id.editText);
+        leaveType = (Spinner)findViewById(R.id.spinner1);
       /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.parseColor("#2979FF"));
         }
@@ -220,17 +241,23 @@ public class ApplyLeavePage extends AppCompatActivity {
         });
 
 
-        Switch onOffSwitch = (Switch)  findViewById(R.id.switch1);
+        onOffSwitch = (Switch)  findViewById(R.id.switch1);
         onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 RelativeLayout ll=(RelativeLayout)findViewById(R.id.to_details);
-                if(isChecked==true)
+                if(isChecked)
+                {
                     ll.setVisibility(View.GONE);
+                    halfDay = true;
+                }
                 else
+                {
                     ll.setVisibility(View.VISIBLE);
+                    halfDay = false;
+                }
             }
 
         });
@@ -323,6 +350,55 @@ public class ApplyLeavePage extends AppCompatActivity {
         // show it
         alertDialog.show();
 
+
+
+    }
+
+
+    public void applyLeave(View view)
+    {
+
+        //Convert date to iso SimpleDateFormat
+        String fromDate = new String(), toDate = new String();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        if(myCalendar!=null)
+            fromDate = dateFormat.format(myCalendar.getTime());
+        if(myCalendar1!=null)
+            toDate = dateFormat.format(myCalendar1.getTime());
+
+
+        String leaveTypeString = new String();
+
+        if(leaveType.getSelectedItem().toString().equals("Casual"))
+            leaveTypeString = "CL";
+        if(leaveType.getSelectedItem().toString().equals("Sick"))
+            leaveTypeString = "SL";
+        if(leaveType.getSelectedItem().toString().equals("Privilege"))//sick privilege
+            leaveTypeString = "PL";
+
+        JSONObject requestObject = new JSONObject();
+        try {
+            requestObject.put("from",fromDate);
+            requestObject.put("to",toDate);
+            requestObject.put("reason", reason.getText().toString());
+            requestObject.put("type", leaveTypeString);
+            requestObject.put("halfday",halfDay.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            URL requestUrl = new URL(ServerDetails.APPLY_LEAVE);
+            ApplyLeaveAsyncTask applyLeaveAsyncTask = new ApplyLeaveAsyncTask(this, requestUrl);
+            applyLeaveAsyncTask.execute(requestObject);
+
+            finish();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
 
     }

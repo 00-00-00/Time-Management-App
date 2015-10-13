@@ -9,12 +9,8 @@
     <string name="drawer_close">Leave History</string>
 
     <string-array name="leave_types">
-        <item>Work from home</item>
         <item>Casual</item>
         <item>Sick</item>
-        <item>Optional</item>
-        <item>Unpaid</item>
-        <item>Bereavement</item>
-
+        <item>Privilege</item>
     </string-array>
 </resources>
