@@ -7,27 +7,30 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
         <ImageView
             android:id="@+id/topdivider"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#78909C"
-            android:layout_marginLeft="100dp"
+            android:background="#E2E2E2"
+            android:layout_marginLeft="80dp"
             android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/monthtext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="JANUARY"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:textSize="25dp"/>
+            android:textSize="18dp"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
         <TextView
             android:id="@+id/hdate"
@@ -36,10 +39,9 @@
             android:text="23"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:padding="15dp"
             android:background="@drawable/circleshape"
             android:layout_margin="10dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             />
 
         <!--this relative width needs to be put in dimen -->
@@ -69,24 +71,42 @@
                 android:textSize="16dp"
                 android:singleLine="true"
                 android:text="desc"
+                android:textColor="#959595"
                 android:layout_below="@+id/htype"
                 />
 
         </RelativeLayout>
-        <TextView
-            android:id="@+id/hdays"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
-            android:layout_marginRight="2dp"
-            android:layout_toRightOf="@+id/typedesc"
-            android:textSize="30dp"
-            android:paddingRight="5dp"
-            android:text="2d"
-            android:textColor="#ff0000"
+            android:layout_height="wrap_content" android:orientation="horizontal"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="end" />
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:id="@+id/hdays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_toRightOf="@+id/typedesc"
+                android:textSize="30dp"
+                android:text="2"
+                android:textColor="#00ff00"
+
+                android:gravity="end" />
+
+            <TextView
+                android:id="@+id/dayDalpha"
+                android:layout_toEndOf="@+id/hdays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_marginRight="2dp"
+                android:layout_toRightOf="@+id/typedesc"
+                android:textSize="30dp"
+                android:paddingRight="5dp"
+                android:text="d"
+                android:textColor="#00ff00"
+                android:gravity="end" />
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -1,20 +1,24 @@
 package com.incture.leaveme.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.incture.leaveme.DataHandle.ApprovedLeaveHistoryAsyncTask;
 import com.incture.leaveme.R;
 import com.incture.leaveme.activity.ApplyLeavePage;
-import com.incture.leaveme.adapter.AdapterApprovedLeaveHistory;
 import com.incture.leaveme.data.LeaveHistoryData;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +30,7 @@ public class Approved extends Fragment {
 
         public Approved(){
 
-                list.add(new LeaveHistoryData("JANUARY","05","Casual leave","Have destist oppointment tomorrow","2d","First"));
+           /*     list.add(new LeaveHistoryData("JANUARY","05","Casual leave","Have destist oppointment tomorrow","2d","First"));
                 list.add(new LeaveHistoryData("JANUARY","15","Sick Leave","Sufferening from typhoid so cannot come","2d","Item"));
 
 
@@ -58,7 +62,7 @@ public class Approved extends Fragment {
 
                 list.add(new LeaveHistoryData("NOVEMBER","08","Priviledge Leave","Have destist oppointment tomorrow","2d","header"));
                 list.add(new LeaveHistoryData("NOVEMBER","19","Casual","Have destist oppointment tomorrow","2d","Item"));
-                list.add(new LeaveHistoryData("NOVEMBER","19","Casual","Have destist oppointment tomorrow","2d","Item"));
+                list.add(new LeaveHistoryData("NOVEMBER","19","Casual","Have destist oppointment tomorrow","2d","Item"));*/
 
         }
 @Override
@@ -72,8 +76,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
                         getActivity().startActivity(intent);
                 }
         });
-
-        rv = (RecyclerView)view.findViewById(R.id.recyclerview_approved_leave);
+        /*rv = (RecyclerView)view.findViewById(R.id.recyclerview_approved_leave);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
 
         AdapterApprovedLeaveHistory adapter = new AdapterApprovedLeaveHistory(list,  new AdapterApprovedLeaveHistory.OnItemClickListener() {
@@ -81,8 +84,24 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sa
                 public void onItemClick(View view, int position) {
                 }
         });
-        rv.setAdapter(adapter);
-        return view;
+        rv.setAdapter(adapter);*/
+
+    try {
+        Log.d("LEAVE", "inside URi");
+        //   URL uri = new URL("http://172.31.99.106:8000/leave-history");
+        URL uri = new URL("http://172.16.10.157:8000/leave-history");
+        // new LeaveHistoryAsyncTask(uri, ctx).execute();
+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB)
+            new ApprovedLeaveHistoryAsyncTask(uri,getActivity()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        else
+            new ApprovedLeaveHistoryAsyncTask(uri,getActivity()).execute();
+
+        Log.d("LEAVE", "inside after URi");
+    }catch (MalformedURLException e) {e.printStackTrace();
+    }
+
+    return view;
 
         }
 }

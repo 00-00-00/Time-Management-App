@@ -3,6 +3,8 @@ package com.incture.leaveme.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 
 
 /**
- * Created by JANANI.N on 04-09-2015.
+ * Created by SHAIBAN on 04-09-2015.
  */
 public class All extends Fragment {
     RecyclerView rv;
@@ -54,14 +56,22 @@ public class All extends Fragment {
         rv.setAdapter(adapter);
 */
         try {
-            Log.d("LEAVE", "inside URi");
+            Log.d("LEAVE", "inside URI");
          //   URL uri = new URL("http://172.31.99.106:8000/leave-history");
             URL uri = new URL("http://172.16.10.157:8000/leave-history");
-            new LeaveHistoryAsyncTask(uri, ctx).execute();
+            // new LeaveHistoryAsyncTask(uri, ctx).execute();
+
+            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB)
+                new LeaveHistoryAsyncTask(uri,ctx).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            else
+                new LeaveHistoryAsyncTask(uri,ctx).execute();
+
+
             Log.d("LEAVE", "inside after URi");
         }catch (MalformedURLException e) {e.printStackTrace();
         }
-        
+
+
         return view;
 
     }

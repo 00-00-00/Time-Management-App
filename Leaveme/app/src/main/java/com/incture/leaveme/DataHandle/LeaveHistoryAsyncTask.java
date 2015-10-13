@@ -11,16 +11,13 @@ import android.view.View;
 import com.incture.leaveme.R;
 import com.incture.leaveme.adapter.AdapterAllLeaveHistory;
 import com.incture.leaveme.data.LeaveHistoryData;
+import com.incture.leaveme.helper.HTTPDataHandler;
 import com.incture.leaveme.utility.TimeUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,6 +33,7 @@ import java.util.Locale;
 public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
     URL url;
     Context context;
+    RecyclerView rv;
 
     public LeaveHistoryAsyncTask(URL url, Context context) {
         this.url = url;
@@ -51,17 +49,22 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
     @Override
     protected String doInBackground(Void... params) {
 
-        String responseString = new String();
+        String stream = null;
+        String urlString = url.toString();
+        HTTPDataHandler hh = new HTTPDataHandler();
+        stream = hh.GetHTTPData(urlString);
+        return stream;
 
-        try {Log.d("LEAVE","doInBackground starts here");
+      /*  String responseString = new String();
 
+        try {
+            Log.d("LEAVE","doInBackground starts here");
 
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 //            httpURLConnection.setDoInput(true);
-            httpURLConnection.setConnectTimeout(5000);
+         //   httpURLConnection.setConnectTimeout(5000);
 
             Log.d("LEAVE", "doInBackground after conTimeouts");
-
 
             httpURLConnection.setRequestMethod("GET");   //change to post
             httpURLConnection.setRequestProperty("Content-Type",
@@ -69,21 +72,21 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
           //  httpURLConnection.setRequestProperty("uniqueid","56179c3bd303b95d0e5793bb");  //Vikram
             httpURLConnection.setRequestProperty("uniqueid","561ca12921d98b4b0e72b086");    //Monisha
             Log.d("LEAVE", "doInBackground after setRequestProperty");
-            /*
+            *//*
             //Create the Json object to send to the server
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("user-id :","Blah blah");   //change the object
             String request = jsonObject.toString();
-            */
+            *//*
 
           //  OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream());
 
             //Add the param objects to the request
-         /*   for (int i = 0; i < params.length; i++) {
+         *//*   for (int i = 0; i < params.length; i++) {
                 outputStreamWriter.write(params[i].toString());
             }
             outputStreamWriter.close();
-*/
+*//*
             Log.d("LEAVE","inside async task");
 
             if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -100,17 +103,17 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
                 }
                 bufferedReader.close();
                 responseString = response.toString();
-            } else {
+                return responseString;
+            }*/ /*else {
                 LeaveResponseDbOpenHelper leaveResponseDbOpenHelper = new LeaveResponseDbOpenHelper(context);
                 Log.d("LEAVE","else of inside HTTP_OK");
                 return leaveResponseDbOpenHelper.getResponseStructure();
 
 
-            }
-
+            }*/
 
             //id response successful add to table
-            if (responseString != null && responseString.length() != 0) {
+           /* if (responseString != null && responseString.length() != 0) {
 
                     //Parse the JSON and insert into DB;
                     LeaveResponseDbOpenHelper memberListTableOpenHelper = new LeaveResponseDbOpenHelper(context);
@@ -122,17 +125,16 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
 
             } else {
                 //if response failed then read from database
-
                 LeaveResponseDbOpenHelper leaveResponseDbOpenHelper = new LeaveResponseDbOpenHelper(context);
                 return leaveResponseDbOpenHelper.getResponseStructure();
 
-            }
+            }*/
 
-        } catch (IOException e) {
+        /*} catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        return null;
+      //  return null;
     }
     ArrayList<LeaveHistoryData> data = new ArrayList<LeaveHistoryData>();
 
@@ -143,6 +145,7 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
         Log.d("LEAVE","onPostExecute");
         if (o != null) {
          try {
+
              JSONObject reader = new JSONObject(o);
              JSONArray jarray = reader.getJSONArray("data");
              Log.d("DATA","before forloop JSONArray");
@@ -162,6 +165,7 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
                  String desc= object.getString("reason");
                  String ndays= object.getString("noOfDays");
 
+                 String stats = object.getString("status");
 
                  DateFormat fDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -195,17 +199,17 @@ public class LeaveHistoryAsyncTask extends AsyncTask<Void,Void,String> {
                  Log.d("DATA","month :"+month+"date :"+date+"type :"+type);
 
                  if(prevMonth.isEmpty()||prevMonth.equalsIgnoreCase(""))
-                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"First"));
+                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"First",stats));
                  else if(prevMonth.equalsIgnoreCase(month))
-                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"header"));
+                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"header",stats));
                  else
-                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"Item"));
+                     data.add(new LeaveHistoryData(month,date,type,desc,ndays,"Item",stats));
                  Log.d("DATA","month :"+month+"date :"+date+"type :"+type);
              }
 
              Log.d("DATA","Outside Array");
 
-             RecyclerView rv = (RecyclerView)((AppCompatActivity)context).findViewById(R.id.recyclerview_all_leave);
+             rv = (RecyclerView)((AppCompatActivity)context).findViewById(R.id.recyclerview_all_leave);
              rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
 
              AdapterAllLeaveHistory adapter = new AdapterAllLeaveHistory(data,  new AdapterAllLeaveHistory.OnItemClickListener() {
