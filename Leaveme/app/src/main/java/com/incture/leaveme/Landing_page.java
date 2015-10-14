@@ -111,6 +111,27 @@ public class Landing_page extends AppCompatActivity {
 //        progressBar.setProgressDrawable(draw);
 
        // cal.setMinDate(min.getTime());
+
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view1);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.drawer_item_5:
+                        Intent i = new Intent(Landing_page.this, Holiday_Calendaar.class);
+                        startActivity(i);
+                        return true;
+                    case R.id.drawer_item_6:
+                        Intent i2 = new Intent(Landing_page.this, Leave_history.class);
+                        startActivity(i2);
+                        return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     public void pagesetup(){

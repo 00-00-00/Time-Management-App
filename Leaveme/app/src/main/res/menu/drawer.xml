@@ -12,6 +12,10 @@
             android:title="Holiday Calendar"/>
 
         <item
+            android:id="@+id/drawer_item_6"
+            android:title="Leave History"/>
+
+        <item
             android:id="@+id/drawer_item_3"
             android:title="Notification"/>
         <item
