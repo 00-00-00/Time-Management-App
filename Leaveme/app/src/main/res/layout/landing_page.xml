@@ -154,7 +154,8 @@
                         android:layout_marginRight="20dp"
                         android:background="@color/my_primary"
                         android:text="View Holiday Calendar"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/button2"
@@ -170,60 +171,124 @@
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:background="@color/my_primary"
                         android:text="View Leave History"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?android:attr/textAppearance"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Leave Details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_margin="10dp"
+                            android:gravity="center"
+                            android:layout_weight="0.3"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Casual"
-                            android:layout_margin="10dp"/>
+                            />
 
                         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                             android:layout_gravity="center_vertical"
                             android:id="@+id/progressBar1"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="20dp"
+                            android:layout_height="10dp"
+                            app:rcMax="100"
+                            app:rcProgress="50"
+                            app:rcProgressColor="@color/my_primary"
+                            app:rcBackgroundColor="#e0e0e0"
                            />
                         <TextView
+                            android:layout_weight="0.15"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_gravity="center_vertical"
-                            android:text="2/8"
+                            android:text="0/0"
                             android:id="@+id/progresstext1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dip"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_margin="10dp"
+                            android:gravity="center"
+                            android:layout_weight="0.3"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Sick    "
-                            android:layout_margin="10dp"/>
+                            android:text="Sick"/>
 
                         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                             android:layout_gravity="center_vertical"
                             android:id="@+id/progressBar2"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content"
+                            android:layout_height="10dp"
+                            app:rcMax="100"
+                            app:rcProgress="50"
+                            app:rcProgressColor="@color/my_primary"
+                            app:rcBackgroundColor="#e0e0e0"
                            />
 
                         <TextView
+                            android:layout_weight="0.15"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_gravity="center_vertical"
-                            android:text="2/8"
+                            android:text="0/0"
                             android:id="@+id/progresstext2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_margin="10dp"
+                            android:gravity="center"
+                            android:layout_weight="0.3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Privelege"/>
+
+                        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/progressBar3"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="10dp"
+                            app:rcMax="100"
+                            app:rcProgress="50"
+                            app:rcProgressColor="@color/my_primary"
+                            app:rcBackgroundColor="#e0e0e0"
+                            />
+
+                        <TextView
+                            android:layout_weight="0.155"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="0/0"
+                            android:id="@+id/progresstext3"
+                            android:layout_width="0dip"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 

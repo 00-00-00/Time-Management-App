@@ -245,7 +245,7 @@ public class Landing_page extends AppCompatActivity {
 
         protected void onPostExecute(String stream){
             String availVal= null, availableVal=null;
-            int totalProgress =0 , availedProgress = 0;
+            int[] totalProgress = new int[3], availedProgress = new int[3];
 
             Log.i("JSON", " onPostExecute ");
             //..........Process JSON DATA................
@@ -262,11 +262,13 @@ public class Landing_page extends AppCompatActivity {
 
 
                     JSONArray jsonArray = coord.optJSONArray("category");
-                    JSONObject jsonObject = jsonArray.optJSONObject(0);
-                    totalProgress = jsonObject.optInt("total");
-                    availedProgress = jsonObject.optInt("availed");
+                    for(int i=0;i<jsonArray.length();i++) {
+                        JSONObject jsonObject = jsonArray.optJSONObject(i);
+                        totalProgress[i] = jsonObject.optInt("total");
+                        availedProgress[i] = jsonObject.optInt("availed");
+                    }
 
-                    Log.i("JSON", " stream got data "+stream);
+                    Log.i("JSON", " stream got data " + stream);
 
                 }
                 catch(JSONException e){
@@ -281,13 +283,32 @@ public class Landing_page extends AppCompatActivity {
 
 
                 RoundCornerProgressBar progress1 = (RoundCornerProgressBar) findViewById(R.id.progressBar1);
-                progress1.setProgressColor(R.color.my_primary_dark);
-                progress1.setBackgroundColor(Color.parseColor("#E0E0E0"));
-                progress1.setMax(totalProgress);
-                progress1.setProgress(availedProgress);
+                progress1.setMax(totalProgress[0]);
+                progress1.setProgress(availedProgress[0]);
 
                 TextView textView = (TextView)findViewById(R.id.progresstext1);
-                textView.setText(""+availedProgress+"/"+totalProgress);
+                String text = ""+availedProgress[0]+"/"+totalProgress[0];
+                textView.setText(text);
+
+
+                progress1 = (RoundCornerProgressBar) findViewById(R.id.progressBar2);
+                progress1.setMax(totalProgress[1]);
+                progress1.setProgress(availedProgress[1]);
+
+                textView = (TextView)findViewById(R.id.progresstext2);
+                text = ""+availedProgress[1]+"/"+totalProgress[1];
+                textView.setText(text);
+
+
+
+                progress1 = (RoundCornerProgressBar) findViewById(R.id.progressBar3);
+                progress1.setMax(totalProgress[2]);
+                progress1.setProgress(availedProgress[2]);
+
+                textView = (TextView)findViewById(R.id.progresstext3);
+                text = ""+availedProgress[2]+"/"+totalProgress[2];
+                textView.setText(text);
+
 
 
             } // if statement end
